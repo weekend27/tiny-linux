@@ -1,0 +1,1 @@
+cmd_arch/x86/syscalls/../include/generated/asm/syscalls_64.h := /bin/bash '/home/weekend27/diff_test/save/linux-4.0.4/arch/x86/syscalls/syscalltbl.sh' /home/weekend27/diff_test/save/linux-4.0.4/arch/x86/syscalls/syscall_64.tbl arch/x86/syscalls/../include/generated/asm/syscalls_64.h
