@@ -202,6 +202,8 @@ rcS的内容如下：
 顺利地看到了eht0，说明ethernet card driver成功啦！
 接下来将要进行network的配置。
 
+![enter](https://github.com/weekend27/my_tiny_linux/raw/master/save/pic/pic1.png)
+
 ##5.网络配置
 
 在刚才的rcS文件末尾加上下面这段代码：
@@ -225,7 +227,7 @@ rcS的内容如下：
         
 显示成功，OK!
 
-
+![network](https://github.com/weekend27/my_tiny_linux/blob/master/save/pic/pic2.png?raw=true)
 
 #第二次裁剪linux kernel(984kB)
 ##修改配置
@@ -262,6 +264,9 @@ rcS的内容如下：
     }
 
 这段测试代码通过查看程序是否能够关中断来判断是否是内核权限。根据结果可知，测试代码在用户态下因为中断保护而无法执行，放在trusted里获得内核权限后可以执行，正确打印所有结果。
+
+![kernel mode linux test](https://github.com/weekend27/my_tiny_linux/blob/master/save/pic/pic3.png?raw=true)
+![test result](https://github.com/weekend27/my_tiny_linux/blob/master/save/pic/pic4.png?raw=true)
 
 记得要在原来机器的ramdisk中先进行静态编译，要不然没法在虚拟机kernel中运行该程序。因为裁剪后的kernel里面缺少gcc，显然无法编译生成可执行文件。
 
