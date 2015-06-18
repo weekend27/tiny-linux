@@ -2,7 +2,7 @@
 *name:Huang Weijian     
 *id:P14206019
 
-#第一次裁剪linux kernel
+#第一次裁剪linux kernel(5862kB)
 ##1. 准备工作
 裁剪内核过程中需要用到的一些库以及工具等，如果没有安装，在裁剪和编译过程将会提示出错，可以根据error log来安装。
 
@@ -40,8 +40,11 @@
 经历过漫长的编译后，看到下面的提示：
 
 > Setup is 15676 bytes (padded to 15872 bytes). 
+
 > System is 5862 kB
+
 > CRC 2626b6c3
+
 > Kernel: arch/x86/boot/bzImage is ready  (#1)
 
 这样顺利就得到了5862kB的kernel Image。
@@ -223,6 +226,11 @@ rcS的内容如下：
 显示成功，OK!
 
 
+
+#第二次裁剪linux kernel(984kB)
+##修改配置
+这次裁剪kernel不再使用defconfig，而是使用menuconfig，在menuconfig中导入我的配置文件.config。
+这里的配置文件参考了杨海宇同学的配置文件，但是，由于杨海宇的配置文件是基于32位机器进行的，所以并不能直接拿来导入运行，在一些关键的地方，做了相应的修改，最终得到的系统大小是984kB，能够顺利地跑起来。
 
 
 
