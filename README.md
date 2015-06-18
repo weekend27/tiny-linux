@@ -6,31 +6,31 @@
 ##1. 准备工作
 裁剪内核过程中需要用到的一些库以及工具等，如果没有安装，在裁剪和编译过程将会提示出错，可以根据error log来安装。
 
-        1). gcc (for building linux kernel and busybox)
-        2). curl (for download)
-        3). ncurses (for linux menuconfig)
+    1). gcc (for building linux kernel and busybox)
+    2). curl (for download)
+    3). ncurses (for linux menuconfig)
         
 新建工作文件夹tiny_linux，下载的源码和裁剪之后的内核都在该文件夹下。
 
-        mkdir $HOME/tiny_linux
-        cd $HOME/tiny_linux
+    mkdir $HOME/tiny_linux
+    cd $HOME/tiny_linux
         
-可以到（https://www.kernel.org/）下载4.0.4版本的linux kernel source code ，以及在（http://busybox.net）下载1.23.2版本的busybox source code, 并解压到当前文件夹。
+下载最新版本的linux kernel 以及busybox，解压到当前文件夹。
 或者：
 
-        curl https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.0.4.tar.xz | tar xJf -    
-        curl http://busybox.net/downloads/busybox-1.23.2.tar.bz2 | tar xjf -
+    curl https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.0.4.tar.xz | tar xJf -    
+    curl http://busybox.net/downloads/busybox-1.23.2.tar.bz2 | tar xjf -
          
 ##2. 编译内核
 编译内核之前先新建一个文件夹obj，为了使得之前获取的源代码不被修改。
 采用默认配置裁剪，由于我的机器是64位，所以选择的是x86_64_defconfig。
 
-        cd $HOME/tiny_linux
-        mkdir obj
-        cd obj
-        mkdir linux_defconfig
-        cd $HOME/tiny_linux/linux-4.0.4
-        make O=../obj/linux_defconfig x86_64_defconfig
+    cd $HOME/tiny_linux
+    mkdir obj
+    cd obj
+    mkdir linux_defconfig
+    cd $HOME/tiny_linux/linux-4.0.4
+    make O=../obj/linux_defconfig x86_64_defconfig
         
 完成之后，配置文件就被写入到$HOME/tiny_linux/obj/linux_defconfig，进入该目录，编译之。
 
