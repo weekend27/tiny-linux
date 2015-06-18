@@ -34,17 +34,14 @@
         
 完成之后，配置文件就被写入到$HOME/tiny_linux/obj/linux_defconfig，进入该目录，编译之。
 
-        cd $HOME/tiny_linux/obj/linux_defconfig
-        make
+    cd $HOME/tiny_linux/obj/linux_defconfig
+    make
        
 经历过漫长的编译后，看到下面的提示：
 
 > Setup is 15676 bytes (padded to 15872 bytes). 
-
 > System is 5862 kB
-
 > CRC 2626b6c3
-
 > Kernel: arch/x86/boot/bzImage is ready  (#1)
 
 这样顺利就得到了5862kB的kernel Image。
