@@ -2,7 +2,7 @@
 *name:Huang Weijian     
 *id:P14206019
 
-#第一次裁剪linux kernel(5862kB)
+#第一次工作(未裁剪版5862kB)
 ##1. 准备工作
 裁剪内核过程中需要用到的一些库以及工具等，如果没有安装，在裁剪和编译过程将会提示出错，可以根据error log来安装。
 
@@ -229,10 +229,29 @@ rcS的内容如下：
 
 ![network](https://github.com/weekend27/my_tiny_linux/blob/master/save/pic/pic2.png?raw=true)
 
-#第二次裁剪linux kernel(984kB)
+
+##问题与小结
+1). 要根据个人机器的不同选择不同的默认配置文件，我这里选择的是x86_64_defconfig。如果想要一个更小的linux kernel，可以选择加载allnoconfig，再在此基础上添加各个功能模块。
+
+2). 编译内核出错时，我根据提示回到linux-4.0.4文件夹下面make mrproper一下，清除了各个链接关系，编译成功通过。
+
+3). 创建init文件之后，由于没有修改文件执行权限，没有+x，导致在虚拟机中读取不出来。修改了chmod +x init就好了。
+
+4). 每次修改了ramdisk里的内容，一定要记得将其重新打包，否则加载的还是上一个压缩包。一开始写完了rcS，没有进行网络配置，后来加上了网络配置代码，忘记了重新打包，找了好久才发现是没有重新打包（低级错误！！！）。
+
+5). 在linux下建立本地服务器代码：python -m SimpleHTTPServer 8000，其中8000是自己设定的端口号。
+
+#第二次裁剪linux kernel(984kB)chmod +x init
 ##修改配置
 这次裁剪kernel不再使用defconfig，而是使用menuconfig，在menuconfig中导入我的配置文件.config。
 这里的配置文件参考了杨海宇同学的配置文件，但是，由于杨海宇的配置文件是基于32位机器进行的，所以并不能直接拿来导入运行，在一些关键的地方，做了相应的修改，最终得到的系统大小是984kB，能够顺利地跑起来。
+
+##问题与小结
+1). 对configure文件的配置，很多时候需要一边google，一边参考别人的配置，一项一项的琢磨选还是不选，很耗时，不过在琢磨的过程中，也更加加深了对linux的理解。
+
+2). driver部分我还不知道该如何优化和选择，有待以后研究源码。最终使用的系统是984kB。
+
+3). 在裁剪后的系统里无法进行ping，究其原因是qemu的以太网驱动是不支持ICMP的。
 
 #Kernel Mode Linux
 参考：[http://www.yl.is.s.u-tokyo.ac.jp/~tosh/kml/](http://www.yl.is.s.u-tokyo.ac.jp/~tosh/kml/)
@@ -256,7 +275,7 @@ rcS的内容如下：
     {
         __asm__ __volatile__("cli");
         int i;
-        for (i = 0; i < 10000000; i++)
+        for (i = 0; i < 100000; i++)
         {
             printf("%d\n", i);
         }
@@ -272,7 +291,12 @@ rcS的内容如下：
 
     gcc -static test.c -o test
 
+##问题和小结
+1). 静态编译，否则没法在裁剪后的系统中执行。
 
+2). 选择的测试代码有讲究，应该是在用户态中无法执行，但是在内核态中可以顺利执行，这样就说明了用户程序确实在内核态中执行了。
+
+3). 通过这次linux kernel实验，学到了如何编译内核，裁剪内核，给内核打补丁，将用户程序泡在内核态等等，真正将操作系统通过实战理解得更深刻。
 
 
 
