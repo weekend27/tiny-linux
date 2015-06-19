@@ -241,7 +241,7 @@ rcS的内容如下：
 
 5). 在linux下建立本地服务器代码：python -m SimpleHTTPServer 8000，其中8000是自己设定的端口号。
 
-#第二次裁剪linux kernel(984kB)chmod +x init
+#第二次裁剪linux kernel(984kB)
 ##修改配置
 这次裁剪kernel不再使用defconfig，而是使用menuconfig，在menuconfig中导入我的配置文件.config。
 这里的配置文件参考了杨海宇同学的配置文件，但是，由于杨海宇的配置文件是基于32位机器进行的，所以并不能直接拿来导入运行，在一些关键的地方，做了相应的修改，最终得到的系统大小是984kB，能够顺利地跑起来。
